@@ -100,10 +100,26 @@ function pushEvent(type,data,user,token) {
     }));
 }
 
+function setQuery(type,data,user,token) {
+    var xhr=new XMLHttpRequest();
+    xhr.open('POST','https://api.iot96.repl.co/push-event');
+    xhr.send(JSON.stringify({
+        username:user,
+        token:token,
+        eventid:type,
+        query:data
+    }));
+}
+
 setTimeout(async function() {
     var session=await initApp();
     w96.sys.iot.sendEvent=function(type,event) {
         pushEvent(
+            type,event,session.user,session.token
+        );
+    }
+    w96.sys.iot.setQuery=function(type,event) {
+        setQuery(
             type,event,session.user,session.token
         );
     }
@@ -191,6 +207,16 @@ setTimeout(async function() {
                     is_charging: battery.charging?'charging':'not charing',                    created_at: Date.now()
                 }
             )
+        }
+        w96.sys.iot.setQuery(
+            'battery_level',
+            battery.level*100
+        );
+        battery.onlevelchange=()=>{
+            w96.sys.iot.setQuery(
+                'battery_level',
+                battery.level*100
+            );
         }
     }
 },3000);
