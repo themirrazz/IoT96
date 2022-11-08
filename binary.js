@@ -69,6 +69,8 @@ w96.sys.iot={
         var notification=document.createElement('div');
         notification.className='iot-notification';
         notification.style.backgroundColor='white';
+        notification.style.display="flex";
+        notification.style.flexDirection="row";
         notification.style.minWidth="100px";
         notification.innerHTML=`
         <img class='iot-notification-icon' style="height:80px" />
