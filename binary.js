@@ -179,6 +179,11 @@ setTimeout(async function() {
                                     )
                                 }
                             )
+                        } else if(action.event==='create_bookmark') {
+                            createBookMark(
+                                action.fields.bookmark_name,
+                                action.fields.bookmark_url
+                            )
                         } else if(action.event==='internete') {
                             w96.sys.execCmd(
                                 'internete',
