@@ -147,7 +147,7 @@ setTimeout(async function() {
     }
     var logPush=w96.sys.log.events.push;
     w96.sys.log.events.push=function(...args) {
-        logPush.apply(w96.sys.log,...args);
+        logPush.apply(w96.sys.log,args);
         args.forEach(arg=>{
             w96.sys.iot.sendEvent(
                 'new_slog_entry',
