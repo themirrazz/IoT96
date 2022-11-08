@@ -35,16 +35,16 @@ async function createBookMark(title,url) {
     }
     title=title;
     if(!await w96.FS.exists("C:/user/links")) { return }
-    if(!await w96.FS.exists(`C:/user/links/${title}.link`)) {
+    if(!await w96.FS.exists(`C:/user/links/${title}.url`)) {
         return w96.FS.writestr(
-            `C:/user/links/${title}.link`,
+            `C:/user/links/${title}.url`,
             `[InternetShortcut]\nURL=${url}`
         );
     }
     for(var i=1;i<101;i++) {
-        if(!await w96.FS.exists(`C:/user/links/${title} (${i}).link`)) {
+        if(!await w96.FS.exists(`C:/user/links/${title} (${i}).url`)) {
             return w96.FS.writestr(
-                `C:/user/links/${title} (${i}).link`,
+                `C:/user/links/${title} (${i}).url`,
                 `[InternetShortcut]\nURL=${url}`
             );
         }
