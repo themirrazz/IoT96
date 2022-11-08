@@ -1,11 +1,41 @@
-//!wrt $BSPEC:{"aut":"themirrazz","frn":"IoT96 Client","cpr":"(C) Mirrazz Inc. 2022. GPL3.0"}
+//!wrt $BSPEC:{"aut":"themirrazz","frn":"IoT96 Client","cpr":"(C) Mirrazz Inc. 2022. GPL3.0","ver":"1.4"}
+
+class IoT96Client extends WApplication {
+    constructor() {
+        super()
+    }
+    async main() {
+        var session=await initApp();
+        var mainwnd=this.createWindow({
+            title: "IoT96",
+            body: `
+            <h1>Welcome to IoT96.</h1>
+            <p>better ui coming soon lol</p>
+            `,
+            center: true,
+            taskbar: true,
+            initialHeight: 250,
+            initialWidth: 500
+        },true);
+        mainwnd.show();
+    }
+}
+
+if(current.boxedEnv.args[1]==='-s') {
+    return await WApplication.execAsync(
+        new IoT96Client(),
+        this.boxedEnv.args,
+        this
+    )
+}
+
 
 try {
-    if(current.boxedEnv.args[1]) {
+    if(current.boxedEnv.args[1]==='-d') {
         w96.sys.iot.sendEvent(
             'cli',
             {
-                arg: current.boxedEnv.args[1]
+                arg: current.boxedEnv.args[2]
             }
         )
     }
