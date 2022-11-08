@@ -210,12 +210,12 @@ setTimeout(async function() {
         }
         w96.sys.iot.setQuery(
             'battery_level',
-            battery.level*100
+            [{battery_level:battery.level*100}]
         );
         battery.onlevelchange=()=>{
             w96.sys.iot.setQuery(
                 'battery_level',
-                battery.level*100
+                [{battery_level:battery.level*100}]
             );
         }
     }
