@@ -29,6 +29,28 @@ if(!current.boxedEnv.args[1]) {
     )
 }
 
+async function createBookMark(title,url) {
+    while(title.includes("/")) {
+        title=title.replace("/","")
+    }
+    title=title;
+    if(!await w96.FS.exists("C:/user/links")) { return }
+    if(!await w96.FS.exists(`C:/user/links/${title}.link`)) {
+        return w96.FS.writestr(
+            `C:/user/links/${title}.link`,
+            `[InternetShortcut]\nURL=${url}`
+        );
+    }
+    for(var i=1;i<101;i++) {
+        if(!await w96.FS.exists(`C:/user/links/${title} (${i}).link`)) {
+            return w96.FS.writestr(
+                `C:/user/links/${title} (${i}).link`,
+                `[InternetShortcut]\nURL=${url}`
+            );
+        }
+    }
+}
+
 
 try {
     if(current.boxedEnv.args[1]==='-d') {
