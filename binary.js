@@ -80,7 +80,7 @@ w96.sys.iot={
         notification.querySelector('img').src=iconURL;
         notification.querySelector('.iot-notification-title b').textContent=title;
         notification.querySelector('.iot-notification-message').textContent=message;
-        notif_container.appendChild(notif_container);
+        notif_container.appendChild(notification);
         setTimeout(()=>{
             notification.parentNode.removeChild(notification);
         },timeout||5000);
