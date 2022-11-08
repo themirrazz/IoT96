@@ -21,7 +21,7 @@ class IoT96Client extends WApplication {
     }
 }
 
-if(current.boxedEnv.args[1]==='-s') {
+if(!current.boxedEnv.args[1]) {
     return await WApplication.execAsync(
         new IoT96Client(),
         this.boxedEnv.args,
