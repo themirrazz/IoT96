@@ -124,7 +124,7 @@ function pushEvent(type,data,user,token) {
 
 function setQuery(type,data,user,token) {
     var xhr=new XMLHttpRequest();
-    xhr.open('POST','https://api.iot96.repl.co/push-event');
+    xhr.open('POST','https://api.iot96.repl.co/push-query');
     xhr.send(JSON.stringify({
         username:user,
         token:token,
