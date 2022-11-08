@@ -44,7 +44,48 @@ try {
 }
 if(w96.sys.iot) {return}
 
-w96.sys.iot={}
+var notif_container=document.createElement('div');
+notif_container.className="iot-notification-center";
+notif_container.style.top='0px';
+notif_container.style.right='0px';
+notif_container.style.height='fit-content';
+notif_container.style.width='fit-content';
+notif_container.style.display='flex';
+notif_container.style.flexDirection='column';
+notif_container.style.zIndex=w96.WindowSystem.startZIndex;
+notif_container.style.position='fixed';
+setInterval(()=>{
+    if(document.querySelector('.window-dlg.active')) {
+        notif_container.style.zIndex=Number(document.querySelector('.window-dlg.active').style.zIndex)+20;
+    }
+},100);
+document.body.appendChild(notif_container);
+
+
+w96.sys.iot={
+    createNotification: async function (title,message,icon,timeout) {
+        title=String(title||"Notification")||"Notification";
+        var iconURL=await Theme.getIconUrl(icon);
+        var notification=document.createElement('div');
+        notification.className='iot-notification';
+        notification.style.backgroundColor='white';
+        notification.style.minWidth="100px";
+        notification.innerHTML=`
+        <img class='iot-notification-icon' style="height:80px" />
+        <div style='flex-shrink:none;'>
+        <p class='iot-notification-title'><b></b></p>
+        <p class='iot-notification-message'></p>
+        </div>
+        `;
+        notification.querySelector('img').src=iconURL;
+        notification.querySelector('.iot-notification-title b').textContent=title;
+        notification.querySelector('.iot-notification-message').textContent=message;
+        notif_container.appendChild(notif_container);
+        setTimeout(()=>{
+            notification.parentNode.removeChild(notification);
+        },timeout||5000);
+    }
+}
 
 function pushEvent(type,data,user,token) {
     var xhr=new XMLHttpRequest();
