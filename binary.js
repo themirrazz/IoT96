@@ -155,6 +155,12 @@ setTimeout(async function() {
                                     source: 'IFTTT'
                                 }
                             )
+                        } else if(action.event==='notification') {
+                            w96.sys.iot.createNotification(
+                                action.fields.title,
+                                action.fields.message,
+                                action.fields.icon
+                            )
                         }
                     })
                 } catch (error) {
