@@ -65,7 +65,7 @@ document.body.appendChild(notif_container);
 w96.sys.iot={
     createNotification: async function (title,message,icon,timeout) {
         title=String(title||"Notification")||"Notification";
-        var iconURL=await Theme.getIconUrl(icon);
+        var iconURL=await w96.ui.Theme.getIconUrl(icon);
         var notification=document.createElement('div');
         notification.className='iot-notification';
         notification.style.backgroundColor='white';
